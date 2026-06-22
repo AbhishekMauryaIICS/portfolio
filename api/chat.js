@@ -3,7 +3,16 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { message } = req.body;
+  const { messages } = req.body;
+
+  // Convert OpenAI-style {role, content} history into Gemini's
+  // {role, parts:[{text}]} format. Gemini uses 'model' instead of 'assistant'.
+  const contents = (messages || []).map(function (m) {
+    return {
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.content }]
+    };
+  });
 
   try {
     const response = await fetch(
@@ -11,9 +20,7 @@ export default async function handler(req, res) {
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: message }] }]
-        })
+        body: JSON.stringify({ contents: contents })
       }
     );
 
