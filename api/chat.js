@@ -1,20 +1,27 @@
-// ✅ NEW GEMINI WAY
-import { GoogleGenAI } from '@google/genai';
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
-// Automatically picks up the environment variable you saved in Vercel
-const ai = new GoogleGenAI(); 
+  const { message } = req.body;
 
-export async function POST(req) {
-  const { messages } = await req.json();
-  
-  // Extract the text prompt from your incoming frontend request
-  // (Gemini takes either a direct string or structured history objects)
-  const userPrompt = messages[messages.length - 1].content;
+  try {
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: message }] }]
+        })
+      }
+    );
 
-  const response = await ai.models.generateContent({
-    model: 'gemini-2.5-flash', // Fast and great for portfolio chat features
-    contents: userPrompt,
-  });
+    const data = await response.json();
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No response';
 
-  return new Response(JSON.stringify({ text: response.text }));
+    res.status(200).json({ reply });
+  } catch (err) {
+    res.status(500).json({ error: 'Something went wrong' });
+  }
 }
