@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek Maurya</title>
+<meta name="description" content="Portfolio of Abhishek Maurya — Software Engineer, Web Developer, Digital Marketer and Cyber Security Expert.">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0B1220;
+    --bg-soft:#0E1626;
+    --surface:#121B2E;
+    --surface-2:#172238;
+    --border:rgba(231,236,245,0.09);
+    --text:#E7ECF5;
+    --text-muted:#8A94AC;
+    --accent:#F2A93B;     /* signal amber */
+    --accent-soft:rgba(242,169,59,0.12);
+    --accent-2:#34C3A6;   /* secure teal */
+    --accent-2-soft:rgba(52,195,166,0.12);
+    --danger:#E2574C;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  a{ color:var(--accent); text-decoration:none; }
+  a:hover{ color:var(--accent); }
+
+  h1,h2,h3,h4{ font-family:var(--font-display); letter-spacing:-0.01em; margin:0; }
+  .mono{ font-family:var(--font-mono); }
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.06em;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+    margin-bottom:.9rem;
+    text-transform:none;
+  }
+  .eyebrow::before{ content:"$"; color:var(--accent-2); }
+
+  section{ padding:6.5rem 0; position:relative; }
+  .section-tight{ padding:4rem 0; }
+
+  /* faint grid texture */
+  .grid-bg{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(231,236,245,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(231,236,245,0.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(circle at 50% 0%, rgba(0,0,0,0.9), transparent 70%);
+  }
+
+  /* ===== Navbar ===== */
+  .navbar{
+    background:rgba(11,18,32,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+    padding:.85rem 0;
+  }
+  .navbar-brand{
+    font-family:var(--font-mono);
+    font-weight:600;
+    color:var(--text) !important;
+    font-size:1rem;
+    letter-spacing:.03em;
+  }
+  .navbar-brand .blip{
+    width:8px;height:8px;border-radius:50%;background:var(--accent-2);
+    display:inline-block; margin-right:8px; box-shadow:0 0 0 4px var(--accent-2-soft);
+  }
+  .nav-link{
+    color:var(--text-muted) !important;
+    font-family:var(--font-mono);
+    font-size:.85rem;
+    margin:0 .35rem;
+    padding:.4rem .7rem !important;
+    border-radius:6px;
+    transition:.2s;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .nav-link:hover, .nav-link.active{
+    color:var(--text) !important;
+    background:var(--surface-2);
+  }
+  .btn-signal{
+    background:var(--accent);
+    border:none;
+    color:#1A1206;
+    font-family:var(--font-mono);
+    font-size:.85rem;
+    font-weight:600;
+    padding:.5rem 1.1rem;
+    border-radius:6px;
+    transition:.2s;
+  }
+  .navbar .btn-signal{ text-transform:uppercase; letter-spacing:.04em; }
+  .btn-signal:hover{ background:#ffbe5c; color:#1A1206; }
+  .btn-outline-secure{
+    border:1px solid var(--border);
+    color:var(--text);
+    font-family:var(--font-mono);
+    font-size:.85rem;
+    padding:.5rem 1.1rem;
+    border-radius:6px;
+    transition:.2s;
+    background:transparent;
+  }
+  .btn-outline-secure:hover{ border-color:var(--accent-2); color:var(--accent-2); }
+
+  /* ===== Hero ===== */
+  .hero{ padding-top:8rem; padding-bottom:5rem; min-height:92vh; display:flex; align-items:center; }
+  .hero h1{ font-size:3.4rem; line-height:1.08; font-weight:700; }
+  .hero .role-line{
+    font-family:var(--font-mono);
+    font-size:1.25rem;
+    color:var(--accent-2);
+    min-height:1.6em;
+  }
+  .role-line .cursor{ display:inline-block; width:2px; background:var(--accent-2); margin-left:2px; animation:blink 1s step-end infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero p.lead-text{ color:var(--text-muted); font-size:1.05rem; max-width:480px; }
+
+  /* profile photo — big, animated gradient border */
+  .profile-photo-ring{
+    width:260px; height:260px;
+    border-radius:50%;
+    padding:5px;
+    margin-bottom:1.8rem;
+    flex-shrink:0;
+    background:linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent));
+    background-size:240% 240%;
+    animation:borderFlow 6s ease infinite, ringGlow 3.2s ease-in-out infinite;
+    position:relative;
+  }
+  @keyframes borderFlow{
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
+  }
+  @keyframes ringGlow{
+    0%, 100%{ box-shadow:0 0 0 0 rgba(242,169,59,0.0), 0 18px 50px -20px rgba(0,0,0,0.65); }
+    50%{ box-shadow:0 0 26px 4px rgba(52,195,166,0.35), 0 18px 50px -20px rgba(0,0,0,0.65); }
+  }
+  .profile-pic-wrap{
+    width:100%; height:100%;
+    border-radius:50%;
+    overflow:hidden;
+    position:relative;
+    background:var(--bg);
+  }
+  .profile-pic-wrap img{
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center 18%;
+    display:block;
+    filter:grayscale(1) contrast(1.2) brightness(1.02);
+  }
+  @media (max-width: 575px){
+    .profile-photo-ring{ width:190px; height:190px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .profile-photo-ring{ animation:none; }
+  }
+
+  /* terminal panel */
+  .terminal{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    box-shadow:0 30px 60px -25px rgba(0,0,0,0.6);
+    overflow:hidden;
+  }
+  .terminal-head{
+    background:var(--surface-2);
+    padding:.65rem 1rem;
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+    border-bottom:1px solid var(--border);
+  }
+  .terminal-head span{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .dot-r{ background:#E2574C; } .dot-y{ background:#F2A93B; } .dot-g{ background:#34C3A6; }
+  .terminal-head .title{ margin-left:auto; font-family:var(--font-mono); font-size:.75rem; color:var(--text-muted); }
+  .terminal-body{
+    font-family:var(--font-mono);
+    font-size:.85rem;
+    padding:1.1rem 1.2rem;
+    min-height:300px;
+    max-height:340px;
+    overflow-y:auto;
+    color:#C9D3E4;
+  }
+  .terminal-body .line{ margin-bottom:.45rem; white-space:pre-wrap; word-break:break-word; }
+  .terminal-body .prompt-sym{ color:var(--accent-2); }
+  .terminal-body .out-key{ color:var(--accent); }
+  .terminal-body .out-dim{ color:var(--text-muted); }
+  .terminal-input-row{ display:flex; align-items:center; gap:.5rem; border-top:1px solid var(--border); padding:.7rem 1.2rem; }
+  .terminal-input-row .prompt-sym{ font-family:var(--font-mono); color:var(--accent-2); }
+  .terminal-input-row input{
+    background:transparent; border:none; outline:none; color:var(--text);
+    font-family:var(--font-mono); font-size:.85rem; flex:1;
+  }
+  .terminal-hint{ font-family:var(--font-mono); font-size:.7rem; color:var(--text-muted); margin-top:.6rem; }
+
+  /* ===== Section heading ===== */
+  .sec-head{ margin-bottom:3rem; }
+  .sec-head h2{ font-size:2.1rem; font-weight:700; }
+  .sec-head p{ color:var(--text-muted); max-width:560px; margin-top:.6rem; }
+
+  /* ===== About ===== */
+  .fact{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:1rem 1.2rem;
+  }
+  .fact .label{ font-family:var(--font-mono); font-size:.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; }
+  .fact .value{ font-family:var(--font-display); font-size:1.15rem; font-weight:600; margin-top:.2rem; }
+
+  /* ===== Stack / layered skills ===== */
+  .layer{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1.4rem 1.5rem;
+    margin-bottom:1rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .layer::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:var(--layer-color, var(--accent));
+  }
+  .layer-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:.85rem; flex-wrap:wrap; gap:.4rem; }
+  .layer-head .num{ font-family:var(--font-mono); font-size:.75rem; color:var(--text-muted); }
+  .layer-head h4{ font-size:1.05rem; }
+  .chip{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:.76rem;
+    color:var(--text);
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:.3rem .6rem;
+    margin:.2rem .3rem 0 0;
+  }
+
+  /* ===== Service modules ===== */
+  .module-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:1.8rem;
+    height:100%;
+    transition:.25s;
+  }
+  .module-card:hover{ border-color:var(--accent-2); transform:translateY(-4px); }
+  .module-icon{
+    width:46px; height:46px; border-radius:10px;
+    background:var(--accent-soft);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--accent); font-size:1.3rem; margin-bottom:1.1rem;
+  }
+  .module-card h4{ font-size:1.1rem; margin-bottom:.5rem; }
+  .module-card p{ color:var(--text-muted); font-size:.93rem; margin-bottom:1rem; }
+
+  /* ===== Projects ===== */
+  .project-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    height:100%;
+    transition:.25s;
+  }
+  .project-card:hover{ border-color:var(--accent); }
+  .project-thumb{
+    height:160px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-mono);
+    color:rgba(255,255,255,0.85);
+    font-size:.85rem;
+    position:relative;
+  }
+  .project-thumb::after{
+    content:""; position:absolute; inset:0;
+    background-image:linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size:18px 18px;
+  }
+  .thumb-1{ background:linear-gradient(135deg,#1d3a5f,#0b1220); }
+  .thumb-2{ background:linear-gradient(135deg,#2a4d3e,#0b1220); }
+  .thumb-3{ background:linear-gradient(135deg,#4a2f1f,#0b1220); }
+  .project-body{ padding:1.4rem; }
+  .project-tag{
+    font-family:var(--font-mono); font-size:.68rem; letter-spacing:.04em;
+    color:var(--accent-2); text-transform:uppercase; margin-bottom:.5rem; display:block;
+  }
+  .project-body h4{ font-size:1.05rem; margin-bottom:.5rem; }
+  .project-body p{ color:var(--text-muted); font-size:.9rem; }
+  .project-links a{ font-family:var(--font-mono); font-size:.8rem; color:var(--text-muted); margin-right:1rem; }
+  .project-links a:hover{ color:var(--accent); }
+
+  /* ===== Experience log ===== */
+  .log{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1.6rem 1.8rem;
+    font-family:var(--font-mono);
+    font-size:.86rem;
+  }
+  .log .entry{ display:flex; gap:1rem; padding:.65rem 0; border-bottom:1px dashed var(--border); }
+  .log .entry:last-child{ border-bottom:none; }
+  .log .ts{ color:var(--text-muted); flex-shrink:0; width:90px; }
+  .log .lvl{ flex-shrink:0; width:62px; font-weight:600; }
+  .lvl-info{ color:var(--accent-2); }
+  .lvl-ok{ color:var(--accent); }
+  .log .msg{ color:var(--text); }
+  .log .msg .role{ color:var(--accent); }
+
+  /* ===== Contact ===== */
+  .contact-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:2rem;
+  }
+  .form-control{
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    color:var(--text);
+    font-family:var(--font-body);
+    padding:.65rem .9rem;
+  }
+  .form-control:focus{
+    background:var(--surface-2);
+    color:var(--text);
+    border-color:var(--accent-2);
+    box-shadow:0 0 0 3px var(--accent-2-soft);
+  }
+  .form-label{ font-family:var(--font-mono); font-size:.78rem; color:var(--text-muted); }
+  .social-row a{
+    width:42px; height:42px; border-radius:8px;
+    background:var(--surface-2); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text); margin-right:.6rem; transition:.2s;
+  }
+  .social-row a:hover{ border-color:var(--accent); color:var(--accent); }
+
+  footer{
+    border-top:1px solid var(--border);
+    padding:2rem 0;
+    color:var(--text-muted);
+    font-family:var(--font-mono);
+    font-size:.8rem;
+  }
+
+  @media (max-width: 991px){
+    .hero{ padding-top:7rem; text-align:left; }
+    .hero h1{ font-size:2.4rem; }
+    .hero-terminal-wrap{ margin-top:3rem; }
+  }
+
+  /* accessible focus */
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:2px solid var(--accent-2);
+    outline-offset:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ===== AI Chat Widget ===== */
+  .chat-toggle{
+    position:fixed; bottom:1.6rem; right:1.6rem; z-index:1000;
+    width:56px; height:56px; border-radius:50%;
+    background:var(--accent); color:#1A1206; border:none;
+    font-size:1.4rem; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 14px 30px -10px rgba(0,0,0,0.55);
+    cursor:pointer; transition:.2s;
+  }
+  .chat-toggle:hover{ background:#ffbe5c; transform:translateY(-2px); }
+  .chat-panel{
+    position:fixed; bottom:5.4rem; right:1.6rem; z-index:1000;
+    width:340px; max-width:88vw; height:440px; max-height:70vh;
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    box-shadow:0 30px 60px -25px rgba(0,0,0,0.65);
+    display:flex; flex-direction:column; overflow:hidden;
+    opacity:0; transform:translateY(12px) scale(0.98); pointer-events:none;
+    transition:.2s ease;
+  }
+  .chat-panel.open{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+  .chat-panel-head{
+    background:var(--surface-2); padding:.65rem 1rem; display:flex; align-items:center; gap:.5rem;
+    border-bottom:1px solid var(--border); flex-shrink:0;
+  }
+  .chat-panel-head span.dot-r, .chat-panel-head span.dot-y, .chat-panel-head span.dot-g{
+    width:9px; height:9px; border-radius:50%; display:inline-block;
+  }
+  .chat-panel-head .title{ font-family:var(--font-mono); font-size:.75rem; color:var(--text-muted); margin-left:.3rem; }
+  .chat-close{
+    margin-left:auto; background:none; border:none; color:var(--text-muted);
+    font-size:.9rem; cursor:pointer; padding:.2rem;
+  }
+  .chat-close:hover{ color:var(--text); }
+  .chat-messages{
+    flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:.6rem;
+    font-size:.88rem;
+  }
+  .chat-msg{
+    max-width:85%; padding:.55rem .8rem; border-radius:10px; line-height:1.45;
+    word-break:break-word; white-space:pre-wrap;
+  }
+  .chat-msg.bot{
+    background:var(--surface-2); color:var(--text); align-self:flex-start;
+    border:1px solid var(--border);
+  }
+  .chat-msg.user{
+    background:var(--accent-2-soft); color:var(--text); align-self:flex-end;
+    border:1px solid rgba(52,195,166,0.3);
+  }
+  .chat-msg.typing{ color:var(--text-muted); font-family:var(--font-mono); }
+  .chat-input-row{
+    display:flex; align-items:center; gap:.5rem; border-top:1px solid var(--border);
+    padding:.6rem .8rem; flex-shrink:0;
+  }
+  .chat-input-row input{
+    flex:1; background:var(--surface-2); border:1px solid var(--border); border-radius:8px;
+    color:var(--text); font-family:var(--font-body); font-size:.85rem; padding:.5rem .7rem; outline:none;
+  }
+  .chat-input-row input:focus{ border-color:var(--accent-2); }
+  .chat-input-row button{
+    background:var(--accent); border:none; color:#1A1206; width:36px; height:36px;
+    border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;
+  }
+  .chat-input-row button:hover{ background:#ffbe5c; }
+  @media (max-width: 480px){
+    .chat-panel{ right:.8rem; left:.8rem; width:auto; bottom:5rem; }
+    .chat-toggle{ right:1rem; bottom:1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- ===== Navbar ===== -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="#top"><span class="blip"></span>ABHISHEK.MAURYA</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" style="border-color:var(--border);">
+      <i class="bi bi-list" style="color:var(--text); font-size:1.4rem;"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="#about">about</a></li>
+        <li class="nav-item"><a class="nav-link" href="#stack">stack</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">experience</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a class="btn-signal" href="#contact">Get in touch</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero" id="top">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <div class="profile-photo-ring">
+          <div class="profile-pic-wrap">
+            <img src="assets/profile.jpg" alt="Photo of Abhishek Maurya">
+          </div>
+        </div>
+        <div class="eyebrow">whoami</div>
+        <h1>Abhishek Maurya</h1>
+        <div class="role-line mono mt-2">
+          <span id="roleText"></span><span class="cursor">&nbsp;</span>
+        </div>
+        <p class="lead-text mt-4">
+          I build software, ship web products, grow them with data-driven marketing,
+          and keep them secure end to end. One person, four disciplines, one connected
+          way of thinking about systems.
+        </p>
+        <div class="d-flex gap-3 mt-4 flex-wrap">
+          <a href="#projects" class="btn-signal">View my work</a>
+          <a href="#contact" class="btn-outline-secure">Contact me</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6 hero-terminal-wrap">
+        <div class="terminal">
+          <div class="terminal-head">
+            <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+            <span class="title">guest@abhishek-maurya:~</span>
+          </div>
+          <div class="terminal-body" id="termBody">
+            <div class="line"><span class="prompt-sym">&gt;</span> whoami</div>
+            <div class="line out-dim">Abhishek Maurya — Software Engineer / Web Developer / Digital Marketer / Cyber Security Expert</div>
+            <div class="line"><span class="prompt-sym">&gt;</span> help</div>
+            <div class="line out-dim">Try: <span class="out-key">about</span>, <span class="out-key">skills</span>, <span class="out-key">projects</span>, <span class="out-key">experience</span>, <span class="out-key">contact</span>, <span class="out-key">clear</span></div>
+          </div>
+          <div class="terminal-input-row">
+            <span class="prompt-sym">&gt;</span>
+            <input type="text" id="termInput" placeholder="type a command and hit enter" autocomplete="off">
+          </div>
+        </div>
+        <div class="terminal-hint">tip: this terminal actually works — try “projects” or “contact”</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== About ===== -->
+<section id="about">
+  <div class="container">
+    <div class="row gy-5 align-items-start">
+      <div class="col-lg-5">
+        <div class="eyebrow">about</div>
+        <h2>One engineer, four lenses on the same problem.</h2>
+        <p class="mt-3" style="color:var(--text-muted);">
+          I started as a developer and kept finding the same pattern: a great product
+          dies quietly without traffic, and a great campaign collapses without a secure,
+          well-built product behind it. So I learned all three sides — building, growing,
+          and defending — instead of outsourcing two of them. Cyber security ties it
+          together: it's the discipline of asking "how could this break" before someone
+          else does, and I bring that question into every line of code and every campaign.
+        </p>
+        <p style="color:var(--text-muted);">
+          Based in India, working with teams and clients globally — remote-first,
+          deadline-respecting, documentation-writing.
+        </p>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <div class="fact"><div class="label">Role</div><div class="value">Full-stack + Security</div></div>
+          </div>
+          <div class="col-sm-6">
+            <div class="fact"><div class="label">Experience</div><div class="value">7+ years</div></div>
+          </div>
+          <div class="col-sm-6">
+            <div class="fact"><div class="label">Based in</div><div class="value">India (Remote-friendly)</div></div>
+          </div>
+          <div class="col-sm-6">
+            <div class="fact"><div class="label">Availability</div><div class="value">Open to projects</div></div>
+          </div>
+          <div class="col-sm-6">
+            <div class="fact"><div class="label">Core stack</div><div class="value">JS · Bootstrap · jQuery</div></div>
+          </div>
+          <div class="col-sm-6">
+            <div class="fact"><div class="label">Focus area</div><div class="value">Secure web products</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Stack (layered skills) ===== -->
+<section id="stack" style="background:var(--bg-soft);">
+  <div class="container">
+    <div class="sec-head">
+      <div class="eyebrow">skills</div>
+      <h2>The stack, layer by layer</h2>
+      <p>Like any real system, my skills sit in layers — each one depends on the layer below it.</p>
+    </div>
+
+    <div class="layer" style="--layer-color:#34C3A6;">
+      <div class="layer-head">
+        <div><span class="num">LAYER 01 · FOUNDATION</span><h4>Core Development</h4></div>
+        <span class="num">stable</span>
+      </div>
+      <div>
+        <span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">JavaScript (ES6+)</span>
+        <span class="chip">Node.js</span><span class="chip">Python</span><span class="chip">PHP</span>
+        <span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">Git &amp; GitHub</span>
+      </div>
+    </div>
+
+    <div class="layer" style="--layer-color:#F2A93B;">
+      <div class="layer-head">
+        <div><span class="num">LAYER 02 · INTERFACE</span><h4>Web Development</h4></div>
+        <span class="num">stable</span>
+      </div>
+      <div>
+        <span class="chip">Bootstrap</span><span class="chip">jQuery</span><span class="chip">React (basics)</span>
+        <span class="chip">REST APIs</span><span class="chip">Responsive Design</span><span class="chip">Cross-browser testing</span>
+        <span class="chip">Performance tuning</span>
+      </div>
+    </div>
+
+    <div class="layer" style="--layer-color:#7AA2E0;">
+      <div class="layer-head">
+        <div><span class="num">LAYER 03 · GROWTH</span><h4>Digital Marketing</h4></div>
+        <span class="num">active</span>
+      </div>
+      <div>
+        <span class="chip">SEO (On &amp; Off page)</span><span class="chip">Google Ads</span><span class="chip">Meta Ads</span>
+        <span class="chip">Google Analytics</span><span class="chip">Email Marketing</span><span class="chip">Content Strategy</span>
+        <span class="chip">Conversion Optimization</span>
+      </div>
+    </div>
+
+    <div class="layer" style="--layer-color:#E2574C;">
+      <div class="layer-head">
+        <div><span class="num">LAYER 04 · DEFENSE</span><h4>Cyber Security</h4></div>
+        <span class="num">monitoring</span>
+      </div>
+      <div>
+        <span class="chip">Vulnerability Assessment</span><span class="chip">Burp Suite</span><span class="chip">Nmap</span>
+        <span class="chip">Wireshark</span><span class="chip">OWASP Top 10</span><span class="chip">Kali Linux</span>
+        <span class="chip">Network Security</span><span class="chip">Ethical Hacking basics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Services ===== -->
+<section id="services">
+  <div class="container">
+    <div class="sec-head">
+      <div class="eyebrow">services</div>
+      <h2>What I do</h2>
+      <p>Four roles, hired separately or as one connected engagement.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="module-card">
+          <div class="module-icon"><i class="bi bi-code-slash"></i></div>
+          <h4>Software Engineering</h4>
+          <p>Clean, maintainable applications — from scripts and internal tools to full backend systems.</p>
+          <div><span class="chip">APIs</span><span class="chip">Automation</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="module-card">
+          <div class="module-icon"><i class="bi bi-window-stack"></i></div>
+          <h4>Web Development</h4>
+          <p>Responsive, fast websites built with HTML, CSS, JS, Bootstrap and jQuery — pixel-accurate.</p>
+          <div><span class="chip">Landing pages</span><span class="chip">Web apps</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="module-card">
+          <div class="module-icon"><i class="bi bi-graph-up-arrow"></i></div>
+          <h4>Digital Marketing</h4>
+          <p>SEO and paid campaigns that turn a finished website into a website that gets found.</p>
+          <div><span class="chip">SEO</span><span class="chip">Paid Ads</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="module-card">
+          <div class="module-icon"><i class="bi bi-shield-lock"></i></div>
+          <h4>Cyber Security</h4>
+          <p>Security audits and hardening so the product you built and marketed doesn't get taken down.</p>
+          <div><span class="chip">Audits</span><span class="chip">Hardening</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Projects ===== -->
+<section id="projects" style="background:var(--bg-soft);">
+  <div class="container">
+    <div class="sec-head">
+      <div class="eyebrow">projects</div>
+      <h2>Selected work</h2>
+      <p>A few projects across the four disciplines. Replace these with your real case studies.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="project-card">
+          <div class="project-thumb thumb-1"><i class="bi bi-window" style="font-size:2rem; opacity:.5;"></i></div>
+          <div class="project-body">
+            <span class="project-tag">Web Development</span>
+            <h4>Business Website Revamp</h4>
+            <p>Rebuilt a slow, outdated site into a fast, responsive Bootstrap + jQuery site with a 40% load-time improvement.</p>
+            <div class="project-links mt-3">
+              <a href="#"><i class="bi bi-github"></i> Code</a>
+              <a href="#"><i class="bi bi-box-arrow-up-right"></i> Live</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="project-card">
+          <div class="project-thumb thumb-2"><i class="bi bi-graph-up" style="font-size:2rem; opacity:.5;"></i></div>
+          <div class="project-body">
+            <span class="project-tag">Digital Marketing</span>
+            <h4>SEO &amp; Ads Growth Campaign</h4>
+            <p>Ran an integrated SEO and Google Ads campaign that grew organic traffic and qualified leads quarter over quarter.</p>
+            <div class="project-links mt-3">
+              <a href="#"><i class="bi bi-file-text"></i> Case study</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="project-card">
+          <div class="project-thumb thumb-3"><i class="bi bi-shield-check" style="font-size:2rem; opacity:.5;"></i></div>
+          <div class="project-body">
+            <span class="project-tag">Cyber Security</span>
+            <h4>Web App Security Audit</h4>
+            <p>Performed a vulnerability assessment on a client web app, found and helped patch several OWASP-listed issues.</p>
+            <div class="project-links mt-3">
+              <a href="#"><i class="bi bi-file-earmark-lock"></i> Report summary</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Experience (log style) ===== -->
+<section id="experience">
+  <div class="container">
+    <div class="sec-head">
+      <div class="eyebrow">experience</div>
+      <h2>Career log</h2>
+      <p>Your work history, read like a system log. Replace timestamps and entries with your real history.</p>
+    </div>
+    <div class="log">
+      <div class="entry">
+        <div class="ts">2025–Till</div>
+        <div class="lvl lvl-ok">OK</div>
+        <div class="msg">Working as <span class="role">Centre Head</span> at IICS, Lajpat Nagar.</div>
+      </div>
+      <div class="entry">
+        <div class="ts">2023–2025</div>
+        <div class="lvl lvl-ok">OK</div>
+        <div class="msg">Worked as <span class="role">Senior Software Faculty</span> at IICS, Yamuna Vihar.</div>
+      </div>
+      <div class="entry">
+        <div class="ts">2021–2022</div>
+        <div class="lvl lvl-info">INFO</div>
+        <div class="msg">Managed <span class="role">Digital Marketing</span> campaigns (SEO + paid) for small business clients. (Faculty)</div>
+      </div>
+      <div class="entry">
+        <div class="ts">2020–2021</div>
+        <div class="lvl lvl-info">INFO</div>
+        <div class="msg">Worked as a <span class="role">Web Developer</span> (MEAN + MERN). (Faculty)</div>
+      </div>
+      <div class="entry">
+        <div class="ts">2019–2020</div>
+        <div class="lvl lvl-info">INFO</div>
+        <div class="msg">Worked as a <span class="role">Software Engineer</span>. (Faculty)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section id="contact" style="background:var(--bg-soft);">
+  <div class="container">
+    <div class="sec-head">
+      <div class="eyebrow">contact</div>
+      <h2>Let's build something secure and visible</h2>
+      <p>Tell me what you're working on — I'll reply within a day or two.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div class="contact-card">
+          <form id="contactForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" placeholder="Your name" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="you@example.com" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Message</label>
+                <textarea class="form-control" rows="4" placeholder="What are you working on?" required></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-signal w-100 w-md-auto">Send message</button>
+                <span id="formStatus" class="mono ms-3" style="font-size:.8rem; color:var(--accent-2);"></span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="contact-card h-100">
+          <div class="fact mb-3"><div class="label">Email</div><div class="value" style="font-size:1rem;">abhishekmaurya2113@gmail.com</div></div>
+          <div class="fact mb-3"><div class="label">Phone</div><div class="value" style="font-size:1rem;">+91 8800593210</div></div>
+          <div class="fact mb-4"><div class="label">Location</div><div class="value" style="font-size:1rem;">India · Remote</div></div>
+          <div class="label mb-2">Find me elsewhere</div>
+          <div class="social-row d-flex">
+            <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container d-flex flex-wrap justify-content-between gap-2">
+    <div>© <span id="year"></span> Abhishek Maurya. All rights reserved.</div>
+    <div>Developed By Abhishek Maurya</div>
+  </div>
+</footer>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+$(function(){
+
+  $('#year').text(new Date().getFullYear());
+
+  /* ---------- Role typing effect ---------- */
+  var roles = ["Software Engineer", "Web Developer", "Digital Marketer", "Cyber Security Expert"];
+  var rIndex = 0, charIndex = 0, deleting = false;
+  function typeRole(){
+    var current = roles[rIndex];
+    if(!deleting){
+      charIndex++;
+      $('#roleText').text(current.substring(0, charIndex));
+      if(charIndex === current.length){
+        deleting = true;
+        setTimeout(typeRole, 1400);
+        return;
+      }
+    } else {
+      charIndex--;
+      $('#roleText').text(current.substring(0, charIndex));
+      if(charIndex === 0){
+        deleting = false;
+        rIndex = (rIndex + 1) % roles.length;
+      }
+    }
+    setTimeout(typeRole, deleting ? 35 : 60);
+  }
+  typeRole();
+
+  /* ---------- Scrollspy active nav state ---------- */
+  var sections = $('section, header');
+  $(window).on('scroll', function(){
+    var scrollPos = $(window).scrollTop() + 150;
+    sections.each(function(){
+      var top = $(this).offset().top;
+      var bottom = top + $(this).outerHeight();
+      var id = $(this).attr('id');
+      if(scrollPos >= top && scrollPos < bottom && id){
+        $('.nav-link').removeClass('active');
+        $('.nav-link[href="#'+id+'"]').addClass('active');
+      }
+    });
+  });
+
+  /* close mobile menu after clicking a link */
+  $('.nav-link, .btn-signal[href^="#"]').on('click', function(){
+    var $menu = $('#navMenu');
+    if($menu.hasClass('show')){ $menu.collapse('hide'); }
+  });
+
+  /* ---------- Interactive terminal ---------- */
+  var $term = $('#termBody');
+  var $input = $('#termInput');
+
+  function printLine(html, cls){
+    $term.append('<div class="line '+(cls||'')+'">'+html+'</div>');
+    $term.scrollTop($term[0].scrollHeight);
+  }
+
+  var commands = {
+    help: function(){
+      printLine('Available commands: <span class="out-key">about</span>, <span class="out-key">skills</span>, <span class="out-key">services</span>, <span class="out-key">projects</span>, <span class="out-key">experience</span>, <span class="out-key">contact</span>, <span class="out-key">clear</span>', 'out-dim');
+    },
+    about: function(){
+      printLine('Scrolling to About…', 'out-dim');
+      scrollToSection('about');
+    },
+    skills: function(){
+      printLine('Scrolling to Stack…', 'out-dim');
+      scrollToSection('stack');
+    },
+    stack: function(){ commands.skills(); },
+    services: function(){
+      printLine('Scrolling to Services…', 'out-dim');
+      scrollToSection('services');
+    },
+    projects: function(){
+      printLine('Scrolling to Projects…', 'out-dim');
+      scrollToSection('projects');
+    },
+    experience: function(){
+      printLine('Scrolling to Experience…', 'out-dim');
+      scrollToSection('experience');
+    },
+    contact: function(){
+      printLine('Scrolling to Contact…', 'out-dim');
+      scrollToSection('contact');
+    },
+    whoami: function(){
+      printLine('Abhishek Maurya — Software Engineer / Web Developer / Digital Marketer / Cyber Security Expert', 'out-dim');
+    },
+    sudo: function(){
+      printLine('Permission denied: nice try. This terminal only opens doors, not root shells.', 'out-dim');
+    },
+    clear: function(){
+      $term.empty();
+    }
+  };
+
+  function scrollToSection(id){
+    var target = $('#'+id);
+    if(target.length){
+      $('html, body').animate({ scrollTop: target.offset().top - 90 }, 500);
+    }
+  }
+
+  $input.on('keydown', function(e){
+    if(e.key === 'Enter'){
+      var val = $input.val().trim();
+      if(val === ''){ return; }
+      printLine('<span class="prompt-sym">&gt;</span> '+ $('<div>').text(val).html());
+      var key = val.toLowerCase();
+      if(commands[key]){
+        commands[key]();
+      } else {
+        printLine('command not found: '+ $('<div>').text(val).html() +' — type <span class="out-key">help</span>', 'out-dim');
+      }
+      $input.val('');
+    }
+  });
+
+  /* ---------- Contact form (front-end only placeholder) ---------- */
+  $('#contactForm').on('submit', function(e){
+    e.preventDefault();
+    $('#formStatus').text('Message captured — connect a backend or form service to send this for real.');
+    this.reset();
+  });
+
+  /* ---------- AI Chat Widget ---------- */
+  var chatHistory = [];
+  var $chatToggle = $('#chatToggle');
+  var $chatPanel = $('#chatPanel');
+  var $chatClose = $('#chatClose');
+  var $chatMessages = $('#chatMessages');
+  var $chatInput = $('#chatInput');
+  var $chatSend = $('#chatSend');
+
+  $chatToggle.on('click', function(){
+    $chatPanel.toggleClass('open');
+    if($chatPanel.hasClass('open')){ $chatInput.focus(); }
+  });
+  $chatClose.on('click', function(){ $chatPanel.removeClass('open'); });
+
+  function addChatMessage(text, cls){
+    var $msg = $('<div class="chat-msg ' + cls + '"></div>').text(text);
+    $chatMessages.append($msg);
+    $chatMessages.scrollTop($chatMessages[0].scrollHeight);
+    return $msg;
+  }
+
+  function sendChatMessage(){
+    var text = $chatInput.val().trim();
+    if(!text){ return; }
+    addChatMessage(text, 'user');
+    chatHistory.push({ role:'user', content:text });
+    $chatInput.val('');
+
+    var $typing = addChatMessage('Thinking…', 'bot typing');
+
+    fetch('/api/chat', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ messages: chatHistory })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      $typing.remove();
+      if(data.error){
+        addChatMessage('Sorry — ' + data.error, 'bot');
+        return;
+      }
+      addChatMessage(data.reply, 'bot');
+      chatHistory.push({ role:'assistant', content:data.reply });
+    })
+    .catch(function(){
+      $typing.remove();
+      addChatMessage('Network error — please try again in a moment.', 'bot');
+    });
+  }
+
+  $chatSend.on('click', sendChatMessage);
+  $chatInput.on('keydown', function(e){
+    if(e.key === 'Enter'){ sendChatMessage(); }
+  });
+
+});
+</script>
+<!-- ===== AI Chat Widget ===== -->
+<button class="chat-toggle" id="chatToggle" aria-label="Open AI chat assistant">
+  <i class="bi bi-chat-dots-fill"></i>
+</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-panel-head">
+    <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+    <span class="title">ask.abhishek — AI assistant</span>
+    <button class="chat-close" id="chatClose" aria-label="Close chat"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">Hey! I'm an AI assistant trained on Abhishek's portfolio. Ask me about his skills, services, or experience.</div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Ask something…" autocomplete="off">
+    <button id="chatSend" aria-label="Send message"><i class="bi bi-send-fill"></i></button>
+  </div>
+</div>
+
+</body>
+</html>
